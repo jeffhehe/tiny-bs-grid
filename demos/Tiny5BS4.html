@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>TinyMCE5 and Bootstrap4 Demo ,title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.0.3/tinymce.min.js"></script>
+  <script>
+    tinyMCE.init({
+      selector: 'textarea.tinymce',
+      external_plugins: {
+        'bootstrap4grid': '/plugins/TinyMCE5/bootstrap4grid/plugin.min.js'
+      },
+      height: 500,
+      theme: 'silver',
+      schema: 'html5',
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor textcolor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount bootstrap4grid'
+      ],
+      toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat code visualblocks bootstrap4grid | help',
+      content_css: [
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+      ],
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>TinyMCE 5.0.3 with Bootstrap 4.3.1 Demo </h1>
+        <div class="form-group">
+          <label for="editor">TinyMCE Editor</label>
+          <textarea id="editor" class="form-control tinymce"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

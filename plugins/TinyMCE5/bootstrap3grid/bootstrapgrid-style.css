@@ -1,0 +1,12 @@
+div{
+    border: 1px dotted #ccc;
+    padding: 5px;
+}
+div.row{
+    margin-right: 0px;
+    margin-left: 0px;
+    border: 1px dotted #666;
+}
+div[class^="col-"], div[class*=" col-"] {
+    border: 1px dashed #999;
+}
