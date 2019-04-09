@@ -1,12 +1,60 @@
-div{
-    border: 1px dotted #ccc;
-    padding: 5px;
-}
-div.row{
-    margin-right: 0px;
+.mce-content-body div.row{
     margin-left: 0px;
-    border: 1px dotted #666;
+    margin-right: 0px;
 }
-div[class^="col-"], div[class*=" col-"] {
-    border: 1px dashed #999;
+[contenteditable=true] div.row{
+    padding: 5px;
+    border: 1px dotted #999;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* disable resize handler in IE11 */
+    [contenteditable=true] div.row{
+        pointer-events: none; 
+    }
+ }
+[contenteditable=true] .row > div[class^="col-"], [contenteditable=true] .row > div[class*=" col-"] {
+    padding-top: 20px;
+    border: 1px dashed #666;
+    min-height: 60px;
+}
+[contenteditable=true] .row > div[class^="col-"] >p:first-child, [contenteditable=true] .row > div[class*=" col-"]> p:first-child{
+    min-height: 30px;
+}
+[contenteditable=true] .row > div[class^="col-"]:before, [contenteditable=true] .row > div[class*=" col-"]:before {
+    font-size: 0.75em;
+    position: absolute;
+    color: #fff;
+    background: #666;
+    height: 15px;
+    left: 0;
+    top: 0;
+    padding: 0 5px;
+}
+[contenteditable=true] .row > div[class^="col-"]:after, [contenteditable=true] .row > div[class*=" col-"]:after {
+    content: '';
+    display: inline-block;
+    border-top: 8px solid #666;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+[contenteditable=true] .row > div[class^="col-"][class$="12"]:before{
+    content:"100% width"
+}
+[contenteditable=true] .row > div[class^="col-"][class$="9"]:before{
+    content:"75% width"
+}
+[contenteditable=true] .row > div[class^="col-"][class$="8"]:before{
+    content:"67% width"
+}
+[contenteditable=true] .row > div[class^="col-"][class$="6"]:before {
+    content:"50% width"
+}
+[contenteditable=true] .row > div[class^="col-"][class$="4"]:before {
+    content:"33% width"
+}
+[contenteditable=true] .row > div[class^="col-"][class$="3"]:before{
+    content:"25% width"
 }

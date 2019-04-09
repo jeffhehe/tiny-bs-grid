@@ -1,8 +1,11 @@
-﻿/**
+﻿/*
  *	tiny-bs-grid https://github.com/jeffhehe/tiny-bs-grid
+ *  this works for TinyMCE5.* on Bootstrap 3.*
+ *  Version: v0.2
  *  Author: Jeff Wang
- *  Date: March 29, 2019
+ *  Date: April 5, 2019
  */
+
 (function () {
   tinymce.PluginManager.add('bootstrap3grid', bootstrap3GridPlugin);
 
@@ -39,7 +42,7 @@
             var gridContent = jQuery(oldGrids[i]).html();
             oldGridContents.push(gridContent);
             for (j = 0; j < gridClasses.length; j++) {
-              if (gridClasses[j].match(/col-/)) {
+              if (/^col-.*/i.test(gridClasses[j])) {
                 //only need to check first column for targe screen size
                 if(j == 0){
                   if (gridClasses[0].indexOf('col-lg') > -1) {
@@ -72,20 +75,20 @@
             label: 'Target Screen',
             items: [
               {
-                text: 'Large - laptops & desktops',
-                value: 'lg'
+                  text: 'Large => 1200px',
+                  value: 'lg'
               },
               {
-                text: 'Medium - small laptops',
-                value: 'md'
+                  text: 'Medium => 992px',
+                  value: 'md'
               },
               {
-                text: 'Small - tablets',
-                value: 'sm'
+                  text: 'Small => 768px',
+                  value: 'sm'
               },
               {
-                text: 'Extra Small - phones',
-                value: 'xs'
+                  text: 'X Small < 768px',
+                  value: 'xs'
               },
             ],
           },
@@ -165,15 +168,15 @@
           var data = e.getData();
           var leadingHtml = '';
           var htmlContents = '';
-          var endingHtml = '<p></p>';
+          var endingHtml = '<p>&nbsp;</p>';
           if (data.leadingBreak == true) {
-            leadingHtml = '<p></p>';
+            leadingHtml = '<p>&nbsp;</p>';
           };
           var generateHtmlContents = function (newGridNumber, gridWidthValues) {
             if (!editMode) {
               // create new grids 
               for (var n = 0; n < newGridNumber; n++) {
-                htmlContents += '<div class="col-' + data.size + '-' + gridWidthValues[n] + '"><p>&nbsp;&nbsp;Column ' + (n + 1) + ' (' + Math.round(gridWidthValues[n] / 12 * 100) + '% width)</p><p></p></div>';
+                htmlContents += '<div class="col-' + data.size + '-' + gridWidthValues[n] + '"><p>&nbsp;</p></div>';
               }
             } else {
               // update existing grids
@@ -184,7 +187,7 @@
                 }
                 // create empity girds
                 for (var m = oldGridNumber; m < newGridNumber; m++) {
-                  htmlContents += '<div class="col-' + data.size + '-' + gridWidthValues[m] + '"><p>&nbsp;&nbsp;Column ' + (m + 1) + ' (' + Math.round(gridWidthValues[m] / 12 * 100) + '% width)</p><p></p></div>';
+                  htmlContents += '<div class="col-' + data.size + '-' + gridWidthValues[m] + '"><p>&nbsp;</p></div>';
                 }
               } else if (oldGridNumber >= newGridNumber) {
                 // if the number of new grids is less than the number of old grids
@@ -193,7 +196,7 @@
                 }
                 // create a new container for all remaining contents below the row
                 if (oldGridNumber > newGridNumber) {
-                  endingHtml = '<p></p><div>' + oldGridContents.join('<p></p>') + '</div><p></p>';
+                  endingHtml = '<p>&nbsp;</p><div>' + oldGridContents.join('<p>&nbsp;</p>') + '</div><p>&nbsp;</p>';
                 }
               }
             }

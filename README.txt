@@ -65,5 +65,15 @@ Dependancies
 2. Bootstrap 3+
 3. jQuery 3 +
 
-Credits:
+Chnage Log
+V0.1 Initial Commit - Mar 29, 2019
+V0.2 Enhancements & Bug fixes - April 9, 2019
+    - Update the CSS styles to show grid borders only in Edit mode
+    - Update the CSS styles to automatically show the grid width label in Edit mode
+    - Disable the resize handler in IE11
+    - Update the JS files to not show static width info in text
+    - Update the function in JS files to detect the grid classes
+    - Fix the demo/Tiny5BS4.html ending title tag typo
+
+Credits
 This project was inspired and modified from tiny-grid https://github.com/aaroniker/tiny-grid author: Aaron Iker.
