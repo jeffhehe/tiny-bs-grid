@@ -1,9 +1,9 @@
 ﻿/*
  *	tiny-bs-grid https://github.com/jeffhehe/tiny-bs-grid
  *  this works for TinyMCE5.* on Bootstrap 3.*
- *  Version: v0.2
+ *  Version: v0.3
  *  Author: Jeff Wang
- *  Date: April 5, 2019
+ *  Date: April 24, 2019
  */
 
 (function () {
@@ -34,9 +34,9 @@
         var parentRow = parentDOMS[0];
         var oldGrids = jQuery(parentRow).children('div');
         var oldGridNumber = oldGrids.length;
-        var oldGridContents = []; 
+        var oldGridContents = [];
         if (oldGridNumber > 0) {
-          columnValue='';
+          columnValue = '';
           for (i = 0; i < oldGridNumber; i++) {
             var gridClasses = jQuery(oldGrids[i]).attr('class').split(/\s+/);
             var gridContent = jQuery(oldGrids[i]).html();
@@ -44,7 +44,7 @@
             for (j = 0; j < gridClasses.length; j++) {
               if (/^col-.*/i.test(gridClasses[j])) {
                 //only need to check first column for targe screen size
-                if(j == 0){
+                if (j == 0) {
                   if (gridClasses[0].indexOf('col-lg') > -1) {
                     screenSize = 'lg';
                   } else if (gridClasses[0].indexOf('col-sm') > -1) {
@@ -60,100 +60,120 @@
             }
           }
         }
-        dialogueTitle = 'Update Bootstrap3 Grids';
+        dialogueTitle = 'Update/Remove Bootstrap3 Grids';
+      }
+
+      var mainPanelItems = [{
+          type: 'selectbox',
+          name: 'size',
+          label: 'Target Screen',
+          items: [{
+              text: 'Large => 1200px',
+              value: 'lg'
+            },
+            {
+              text: 'Medium => 992px',
+              value: 'md'
+            },
+            {
+              text: 'Small => 768px',
+              value: 'sm'
+            },
+            {
+              text: 'X Small < 768px',
+              value: 'xs'
+            },
+          ],
+        },
+        {
+          type: 'selectbox',
+          name: 'grid',
+          label: 'Grid',
+          items: [{
+              text: '1 Column',
+              value: '12'
+            },
+            {
+              text: '2 Columns (1:1)',
+              value: '66'
+            },
+            {
+              text: '2 Columns (2:1)',
+              value: '84'
+            },
+            {
+              text: '2 Columns (3:1)',
+              value: '93'
+            },
+            {
+              text: '2 Columns (1:2)',
+              value: '48'
+            },
+            {
+              text: '2 Columns (1:3)',
+              value: '39'
+            },
+            {
+              text: '3 Columns (1:1:1)',
+              value: '444'
+            },
+            {
+              text: '3 Columns (2:1:1)',
+              value: '633'
+            },
+            {
+              text: '3 Columns (1:2:1)',
+              value: '363'
+            },
+            {
+              text: '3 Columns (1:1:2)',
+              value: '336'
+            },
+            {
+              text: '4 Columns (1:1:1:1)',
+              value: '3333'
+            }
+          ],
+        },
+        {
+          type: 'checkbox',
+          name: 'leadingBreak',
+          label: 'Add a Leading Line Break'
+        }
+      ];
+
+      var panelBody = {
+        type: 'panel',
+        items: mainPanelItems
+      }
+
+      if (editMode) {
+        panelBody = {
+          type: 'tabpanel',
+          tabs: [{
+              title: 'Update Bootstrap Grids',
+              items: mainPanelItems
+            },
+            {
+              title: 'Remove Bootstrap Grids',
+              items: [{
+                type: 'checkbox',
+                name: 'removeGrids',
+                label: 'Remove Bootstrap Grids',
+              }]
+            }
+          ]
+        };
       }
 
       editor.windowManager.open({
         title: dialogueTitle,
-        width: 450,
-        height: 150,
-        body: {
-          type: 'panel',
-          items: [{
-            type: 'selectbox',
-            name: 'size',
-            label: 'Target Screen',
-            items: [
-              {
-                  text: 'Large => 1200px',
-                  value: 'lg'
-              },
-              {
-                  text: 'Medium => 992px',
-                  value: 'md'
-              },
-              {
-                  text: 'Small => 768px',
-                  value: 'sm'
-              },
-              {
-                  text: 'X Small < 768px',
-                  value: 'xs'
-              },
-            ],
-          },
-          {
-            type: 'selectbox',
-            name: 'grid',
-            label: 'Grid',
-            items: [{
-                text: '1 Column',
-                value: '12'
-              },
-              {
-                text: '2 Columns (1:1)',
-                value: '66'
-              },
-              {
-                text: '2 Columns (2:1)',
-                value: '84'
-              },
-              {
-                text: '2 Columns (3:1)',
-                value: '93'
-              },
-              {
-                text: '2 Columns (1:2)',
-                value: '48'
-              },
-              {
-                text: '2 Columns (1:3)',
-                value: '39'
-              },
-              {
-                text: '3 Columns (1:1:1)',
-                value: '444'
-              },
-              {
-                text: '3 Columns (2:1:1)',
-                value: '633'
-              },
-              {
-                text: '3 Columns (1:2:1)',
-                value: '363'
-              },
-              {
-                text: '3 Columns (1:1:2)',
-                value: '336'
-              },
-              {
-                text: '4 Columns (1:1:1:1)',
-                value: '3333'
-              }
-            ],
-          },
-          {
-            type: 'checkbox',
-            name: 'leadingBreak',
-            label: 'Add a Leading Line Break'
-          }
-        ]},
+        body: panelBody,
         initialData: {
           size: screenSize,
           grid: columnValue
         },
-        buttons:[
-          {
+        buttons: [{
             type: 'submit',
             name: 'submitBtn',
             text: 'Submit',
@@ -172,6 +192,13 @@
           if (data.leadingBreak == true) {
             leadingHtml = '<p>&nbsp;</p>';
           };
+          if (data.removeGrids == true && editMode) {
+            // get contents from the grids
+            htmlContents = oldGridContents.join('<p>&nbsp;</p>');
+            jQuery(parentDOMS).replaceWith(leadingHtml + htmlContents + endingHtml);
+            e.close();
+            return;
+          }
           var generateHtmlContents = function (newGridNumber, gridWidthValues) {
             if (!editMode) {
               // create new grids 

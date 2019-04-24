@@ -74,6 +74,7 @@ V0.2 Enhancements & Bug fixes - April 9, 2019
     - Update the JS files to not show static width info in text
     - Update the function in JS files to detect the grid classes
     - Fix the demo/Tiny5BS4.html ending title tag typo
-
+V0.3 Enhancement - April 24, 2019
+    - Enable users to remove bootstrap grid system while maintain the same contents
 Credits
 This project was inspired and modified from tiny-grid https://github.com/aaroniker/tiny-grid author: Aaron Iker.
