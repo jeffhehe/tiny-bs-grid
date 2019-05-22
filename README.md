@@ -2,6 +2,18 @@
 This plugin enables users to create or update Bootstrap (v3, v4) grid system within TinyMCE (v4, v5) editor. 
 
 There are 4 versions of this plugin customized for different combinations of TinyMCE (v4 or v5) and Bootstrap (v3 or v4).
+## Demos
+- Create a bootstrap grid system
+
+![alt text](https://github.com/jeffhehe/tiny-bs-grid/blob/master/demos/Create_BS_Grids.gif?raw=true "Create a Bootstrap grid system")
+
+- Update an existing bootstrap grid system while maintaining the contents
+
+![alt text](https://github.com/jeffhehe/tiny-bs-grid/blob/master/demos/Update_BS_Grids.gif?raw=true "Update an existing Bootstrap grid system")
+
+- Delete a bootstrap grid system while maintaining the contents
+
+![alt text](https://github.com/jeffhehe/tiny-bs-grid/blob/master/demos/Delete_BS_Grids.gif?raw=true "Delete a bootstrap grid system")
 
 ## Limitation
 This plugin only creates or updates simple Bootstrap grids. Nested grids or mulitiple target screen grids are not supported. 
