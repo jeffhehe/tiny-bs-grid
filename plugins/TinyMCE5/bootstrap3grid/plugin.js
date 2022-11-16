@@ -228,41 +228,10 @@
               }
             }
           };
-          switch (data.grid) {
-            case '12':
-              generateHtmlContents(1, [12]);
-              break;
-            case '66':
-              generateHtmlContents(2, [6, 6]);
-              break;
-            case '84':
-              generateHtmlContents(2, [8, 4]);
-              break;
-            case '93':
-              generateHtmlContents(2, [9, 3]);
-              break;
-            case '48':
-              generateHtmlContents(2, [4, 8]);
-              break;
-            case '39':
-              generateHtmlContents(2, [3, 9]);
-              break;
-            case '444':
-              generateHtmlContents(3, [4, 4, 4]);
-              break;
-            case '633':
-              generateHtmlContents(3, [6, 3, 3]);
-              break;
-            case '363':
-              generateHtmlContents(3, [3, 6, 3]);
-              break;
-            case '336':
-              generateHtmlContents(3, [3, 3, 6]);
-              break;
-            case '3333':
-              generateHtmlContents(4, [3, 3, 3, 3]);
-              break;
-          }
+
+          const n = data.grid.length;
+          generateHtmlContents(n, data.grid.split('').map(Number));
+
           if (editMode) {
             jQuery(parentDOMS).replaceWith(leadingHtml + '<div class="row">' + htmlContents + '</div>' + endingHtml);
           } else {
