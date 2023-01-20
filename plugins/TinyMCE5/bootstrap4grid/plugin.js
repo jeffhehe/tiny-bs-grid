@@ -1,9 +1,9 @@
 ﻿/*
  *	tiny-bs-grid https://github.com/jeffhehe/tiny-bs-grid
  *  this works for TinyMCE5.* on Bootstrap 4.*
- *  Version: v0.3
+ *  Version: v0.4
  *  Author: Jeff Wang
- *  Date: April 24, 2019
+ *  Date: Jan 20, 2023
  */
 
 (function () {
@@ -25,7 +25,7 @@
 
     function Tinymce_bs4_grid() {
       var dialogueTitle = 'Insert Bootstrap4 Grids';
-      var columnValue = '12';
+      var columnValue = ['12'];
       var screenSize = '-md';
       var node = editor.selection.getNode();
       var parentDOMS = jQuery(node).parents('div.row');
@@ -36,7 +36,7 @@
         var oldGridNumber = oldGrids.length;
         var oldGridContents = [];
         if (oldGridNumber > 0) {
-          columnValue = '';
+          columnValue = [];
           for (i = 0; i < oldGridNumber; i++) {
             var gridClasses = jQuery(oldGrids[i]).attr('class').split(/\s+/);
             var gridContent = jQuery(oldGrids[i]).html();
@@ -59,7 +59,7 @@
                 }
                 var lastDashPos = gridClasses[j].lastIndexOf('-');
                 var widthNumb = gridClasses[j].substr(lastDashPos + 1);
-                columnValue += widthNumb;
+                columnValue.push(widthNumb);
               }
             }
           }
@@ -103,43 +103,43 @@
             },
             {
               text: '2 Columns (1:1)',
-              value: '66'
+              value: '6,6'
             },
             {
               text: '2 Columns (2:1)',
-              value: '84'
+              value: '8,4'
             },
             {
               text: '2 Columns (3:1)',
-              value: '93'
+              value: '9,3'
             },
             {
               text: '2 Columns (1:2)',
-              value: '48'
+              value: '4,8'
             },
             {
               text: '2 Columns (1:3)',
-              value: '39'
+              value: '3,9'
             },
             {
               text: '3 Columns (1:1:1)',
-              value: '444'
+              value: '4,4,4'
             },
             {
               text: '3 Columns (2:1:1)',
-              value: '633'
+              value: '6,3,3'
             },
             {
               text: '3 Columns (1:2:1)',
-              value: '363'
+              value: '3,6,3'
             },
             {
               text: '3 Columns (1:1:2)',
-              value: '336'
+              value: '3,3,6'
             },
             {
               text: '4 Columns (1:1:1:1)',
-              value: '3333'
+              value: '3,3,3,3'
             }
           ],
         },
@@ -179,7 +179,7 @@
         body: panelBody,
         initialData: {
           size: screenSize,
-          grid: columnValue
+          grid: columnValue.toString()
         },
         buttons: [{
             type: 'submit',
@@ -207,7 +207,8 @@
             e.close();
             return;
           }
-          var generateHtmlContents = function (newGridNumber, gridWidthValues) {
+          var generateHtmlContents = function ( gridWidthValues) {
+            const newGridNumber = gridWidthValues.length;
             if (!editMode) {
               // create new grids 
               for (var n = 0; n < newGridNumber; n++) {
@@ -237,8 +238,7 @@
             }
           };
 
-          const n = data.grid.length;
-          generateHtmlContents(n, data.grid.split('').map(Number));
+          generateHtmlContents(data.grid.split(','));
 
           if (editMode) {
             jQuery(parentDOMS).replaceWith(leadingHtml + '<div class="row">' + htmlContents + '</div>' + endingHtml);
